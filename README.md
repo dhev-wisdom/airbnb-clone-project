@@ -51,7 +51,7 @@ To build a robust and scalable backend system that powers the core functionality
 
 ---
 
-## 🧰 Key Features
+## 🧰 Feature Breakdown
 
 ### 1. 🔐 User Authentication
 - JWT-based registration and login
@@ -115,30 +115,193 @@ docker-compose exec web python manage.py createsuperuser
 
 ```
 
-### Team Roles
-👥 Team Roles
+## 👥 Team Roles
 This project follows a modular and professional development workflow, inspired by industry standards. Each team role contributes to a specific layer of the system’s architecture:
 
-🔧 Backend Developer
+### 🔧 Backend Developer
 Responsibilities:
 Designs and implements the core application logic, including API endpoints (REST and GraphQL), database schemas, user authentication, business rules, and integration with external services (e.g., payments).
 
 Tools: Django, DRF, Graphene, Celery, Redis
 
-🗄️ Database Administrator (DBA)
+### 🗄️ Database Administrator (DBA)
 Responsibilities:
 Manages database structure and performance. Oversees indexing strategies, query optimization, data migrations, and backup procedures to ensure data integrity and efficient access.
 
 Tools: PostgreSQL, pgAdmin, Redis (for caching), raw SQL for tuning
 
-⚙️ DevOps Engineer
+### ⚙️ DevOps Engineer
 Responsibilities:
 Manages infrastructure setup and deployment pipelines. Handles Dockerization, environment configuration, CI/CD integration, monitoring tools, and scaling strategies using Kubernetes.
 
 Tools: Docker, Docker Compose, Kubernetes, GitHub Actions (CI/CD), Nginx, monitoring tools (e.g., Prometheus/Grafana)
 
-✅ QA Engineer
+### ✅ QA Engineer
 Responsibilities:
 Ensures the stability and correctness of the system by writing and maintaining unit, integration, and end-to-end tests. Validates features against requirements and monitors bug reports and test coverage.
 
 Tools: Django Test Framework, Pytest, Postman, Swagger UI, Selenium (for E2E)
+
+## 🗃️ Database Design
+The database schema is structured around key entities that represent core components of the Airbnb platform. Each entity includes essential fields and is connected through relational mappings to support real-world use cases like reservations, payments, and reviews.
+
+### 👤 Users
+Represents both guests and hosts on the platform.
+
+Key Fields:
+
+id: Unique identifier (primary key)
+
+email: User's email (used for login)
+
+password: Hashed password for authentication
+
+is_host: Boolean flag to distinguish hosts from guests
+
+date_joined: Timestamp of user registration
+
+Relationships:
+
+A user can own multiple properties
+
+A user can make multiple bookings
+
+A user can write multiple reviews
+
+### 🏠 Properties
+Represents listings created by hosts.
+
+Key Fields:
+
+id: Unique identifier
+
+title: Name or headline of the property
+
+description: Detailed description of the property
+
+price_per_night: Cost per night
+
+location: Address or coordinates
+
+Relationships:
+
+A property is owned by one user (host)
+
+A property can have many bookings
+
+A property can receive many reviews
+
+### 📅 Bookings
+Represents reservations made by users.
+
+Key Fields:
+
+id: Unique identifier
+
+user_id: Reference to the guest making the booking
+
+property_id: Reference to the booked property
+
+start_date: Check-in date
+
+end_date: Check-out date
+
+Relationships:
+
+A booking is made by one user
+
+A booking belongs to one property
+
+A booking can have one payment
+
+### 💳 Payments
+Tracks transaction data for each booking.
+
+Key Fields:
+
+id: Unique identifier
+
+booking_id: Reference to the related booking
+
+amount: Total amount paid
+
+status: Payment status (e.g., paid, pending, failed)
+
+timestamp: When the payment was processed
+
+Relationships:
+
+A payment is linked to one booking
+
+A booking can have one payment
+
+### ⭐ Reviews
+Represents feedback given by users about properties.
+
+Key Fields:
+
+id: Unique identifier
+
+user_id: Reference to the guest writing the review
+
+property_id: Property being reviewed
+
+rating: Star rating (1–5)
+
+comment: Written feedback
+
+Relationships:
+
+A review is written by one user
+
+A review is linked to one property
+
+A user can only review a property they booked
+
+## 🔐 API Security
+Security is critical to building trust and maintaining the integrity of user data, transactions, and platform operations. This project implements several key security mechanisms:
+
+### 🔑 Authentication
+JWT-based authentication is used to verify the identity of users securely.
+
+Tokens are issued on login and are required for accessing protected endpoints.
+
+### ✅ Authorization
+Role-based access control (RBAC) ensures that only authorized users (e.g., hosts vs. guests) can perform specific actions such as managing properties or bookings.
+
+### ⛔ Rate Limiting
+Prevents abuse and brute-force attacks by limiting the number of requests a user or IP can make within a given timeframe.
+
+### 🔒 Secure Data Handling
+Passwords are stored using strong hashing algorithms.
+
+Sensitive operations (e.g., payments) use HTTPS and token-based validation.
+
+Input validation and sanitization help prevent injection and cross-site scripting (XSS) attacks.
+
+### Why It Matters:
+
+Protecting User Data: Email, password, and booking history must be secured.
+
+Securing Payments: Financial transactions should be tamper-proof and encrypted.
+
+Platform Integrity: Preventing unauthorized access and spam ensures reliability and trust.
+
+## 🔁 CI/CD Pipeline
+### What is CI/CD?
+Continuous Integration (CI) is the process of automatically testing and integrating code changes.
+Continuous Deployment (CD) ensures that once code passes tests, it's automatically deployed to production or staging environments.
+
+### Why It’s Important
+Faster Development: Automates testing, building, and deployment of new features.
+
+Fewer Bugs: Immediate feedback on code quality and security.
+
+Deployment Confidence: Every push goes through a standardized, repeatable deployment pipeline.
+
+### Tools Used
+GitHub Actions (planned): For running tests, linting, and deployment.
+
+Docker: Ensures consistency across development and production environments.
+
+Kubernetes (optional): Supports scalable deployment and rolling updates.
