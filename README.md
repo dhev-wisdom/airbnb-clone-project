@@ -35,6 +35,20 @@ To build a robust and scalable backend system that powers the core functionality
 | **API Docs**    | OpenAPI, GraphQL schema   |
 | **CI/CD**       | GitHub Actions *(planned)*|
 
+| Technology                      | Purpose                                                                                                                                           |
+| ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Django**                      | A high-level Python web framework used to build robust and scalable backend systems. Handles routing, models, and core business logic.            |
+| **Django REST Framework (DRF)** | Extends Django’s capabilities to build RESTful APIs for standard CRUD operations.                                                                 |
+| **GraphQL (Graphene-Django)**   | Provides a flexible and efficient way for clients to query and mutate backend data. Enables precise data fetching for frontend apps.              |
+| **PostgreSQL**                  | A powerful open-source relational database used to store structured data such as users, properties, bookings, and transactions.                   |
+| **Redis**                       | In-memory data store used for caching frequently accessed data, managing sessions, and enabling fast reads. Also supports task queues via Celery. |
+| **Celery**                      | Asynchronous task queue system used for background jobs such as sending emails, processing payments, or generating reports.                       |
+| **Docker**                      | Containerization platform that ensures consistent development and deployment environments across machines and stages.                             |
+| **Kubernetes**                  | Container orchestration system used to manage scaling, load balancing, and automated deployments in a production environment.                     |
+| **OpenAPI (Swagger)**           | Auto-generates interactive API documentation for REST endpoints, enabling developers to understand and test the backend easily.                   |
+| **GitHub Actions (Planned)**    | CI/CD platform for automating tests, builds, and deployments directly from the GitHub repository.                                                 |
+
+
 ---
 
 ## 🧰 Key Features
