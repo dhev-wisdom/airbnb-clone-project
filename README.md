@@ -1,99 +1,130 @@
-# Airbnb Clone Project
+# 🏠 Airbnb Clone – Scalable Backend System
 
-A full-scale clone of the core systems powering Airbnb. This project is designed to mimic the architecture, functionality, and features of the Airbnb platform — including property listings, bookings, reservations, payments, reviews, likes/favorites, user authentication, and more.
+This project is a full-scale **Airbnb Clone**, focused on replicating the **backend architecture and core features** of the Airbnb platform. It includes user management, property listings, bookings, payments, reviews, and more — built with a modern tech stack that supports scalability, performance, and developer experience.
 
-## 🚀 Project Overview
+---
 
-This Airbnb Clone is a comprehensive, production-ready project built to simulate real-world systems. It is intended for learning, experimentation, and potential extension into a deployable product. The backend is built primarily with **Django**, and leverages modern tools such as **GraphQL**, **PostgreSQL**, **Docker**, and **Kubernetes** for performance, scalability, and modularity.
+## 🚀 Objective
 
-## 🧰 Tech Stack
+To build a robust and scalable backend system that powers the core functionality of an Airbnb-like platform, enabling seamless interactions between guests and hosts.
 
-### Backend
-- **Django**: Core backend framework
-- **Django REST Framework (DRF)**: For REST APIs (where needed)
-- **GraphQL (Graphene-Django)**: Primary API layer
-- **PostgreSQL**: Relational database
-- **Redis**: Caching & background tasks (via Celery)
-- **Celery**: Task queue for asynchronous operations
-- **Docker**: Containerized development & deployment
-- **Kubernetes**: Container orchestration & scalability
+---
 
-### DevOps / Tooling
-- **Docker Compose**: Development environment orchestration
-- **Kubernetes YAML Configs**: Production-grade deployment
-- **GitHub Actions** *(planned)*: CI/CD integration
+## 🏆 Project Goals
 
-### (Optional / In Progress) Frontend
-- **React.js or Next.js**
-- **Tailwind CSS**
-- **Apollo Client** (for consuming GraphQL APIs)
+- **User Management**: Secure registration, authentication, and profile handling.
+- **Property Management**: CRUD operations for property listings.
+- **Booking System**: Efficient and conflict-free reservations and availability tracking.
+- **Payment Processing**: Secure and trackable transactions.
+- **Review System**: Collect feedback and ratings from users.
+- **Data Optimization**: Fast, efficient queries using indexing and caching.
+- **Scalable Deployment**: Docker and Kubernetes for microservice-ready architecture.
 
-## 🔧 Features (Implemented / In Progress)
+---
 
-### ✅ User Features
-- User registration & login (JWT authentication)
-- User profiles
-- Host & guest roles
+## ⚙️ Technology Stack
 
-### 🏡 Property Listings
-- Create, update, delete property listings
-- Search and filter properties
-- Upload property images
+| Component       | Tech Used                 |
+|----------------|---------------------------|
+| **Backend**     | Django, DRF, GraphQL      |
+| **Database**    | PostgreSQL                |
+| **Asynchronous Tasks** | Celery + Redis     |
+| **Caching**     | Redis                     |
+| **Containerization** | Docker               |
+| **Orchestration** | Kubernetes              |
+| **API Docs**    | OpenAPI, GraphQL schema   |
+| **CI/CD**       | GitHub Actions *(planned)*|
 
-### 📅 Bookings & Reservations
-- Book properties
-- Reservation calendar
-- Cancelations, refunds
+---
 
-### 💳 Payments
-- Integration with payment gateways (e.g. Stripe)
-- Transaction history
-- Booking invoice generation
+## 🧰 Key Features
 
-### ⭐ Reviews & Ratings
-- Submit reviews
-- Rate properties
-- View average ratings
+### 1. 🔐 User Authentication
+- JWT-based registration and login
+- Endpoint: `/users/`, `/users/{id}/`
+- Profile management and role (host/guest) support
 
-### ❤️ Likes / Favorites
-- Favorite a property
-- View saved properties
+### 2. 🏡 Property Management
+- List, retrieve, update, and delete properties
+- Endpoint: `/properties/`, `/properties/{id}/`
+- Media/image uploads supported
 
-### 🔄 System Architecture
-- Caching with Redis
-- Background jobs for emails, notifications, cleanup
-- Scalable microservice-like structure using Django apps
-- GraphQL API schema for flexibility in frontend consumption
+### 3. 📅 Booking System
+- Reserve and manage property bookings
+- Prevent double-booking via date conflict checks
+- Endpoint: `/bookings/`, `/bookings/{id}/`
 
-## 🧪 Testing
+### 4. 💳 Payment Processing
+- Integrate payment gateways (e.g., Stripe)
+- Store transaction records and booking invoices
+- Endpoint: `/payments/`
 
-- Pytest/Django built-in testing suite
-- Coverage reports
-- Test cases for critical components (auth, bookings, payments)
+### 5. ⭐ Review System
+- Post and fetch user reviews and star ratings
+- Endpoint: `/reviews/`, `/reviews/{id}/`
 
-## 🛠️ Setup & Installation
+### 6. 📦 API Architecture
+- **REST**: Built with Django REST Framework
+- **GraphQL**: Flexible querying with Graphene-Django
+- **OpenAPI**: Auto-generated documentation
+
+### 7. 🧠 Optimization
+- **Indexing**: Frequently accessed fields indexed
+- **Caching**: Redis used for data caching and performance
+- **Asynchronous Tasks**: Celery handles time-consuming processes (emails, payment verifications)
+
+---
+
+## 🛠️ Installation & Setup
 
 ### Prerequisites
 - Docker & Docker Compose
-- Python 3.10+
 - PostgreSQL
 - Redis
+- Python 3.10+
 
-### Development Setup
+### Quickstart
 
 ```bash
 # Clone the repository
 git clone https://github.com/yourusername/airbnb-clone.git
 cd airbnb-clone
 
-# Build and run Docker containers
+# Start containers
 docker-compose up --build
 
-# Run migrations
+# Run initial migrations
 docker-compose exec web python manage.py migrate
 
-# Create a superuser
+# Create superuser
 docker-compose exec web python manage.py createsuperuser
 
-# Access the app at
-http://localhost:8000
+```
+
+### Team Roles
+👥 Team Roles
+This project follows a modular and professional development workflow, inspired by industry standards. Each team role contributes to a specific layer of the system’s architecture:
+
+🔧 Backend Developer
+Responsibilities:
+Designs and implements the core application logic, including API endpoints (REST and GraphQL), database schemas, user authentication, business rules, and integration with external services (e.g., payments).
+
+Tools: Django, DRF, Graphene, Celery, Redis
+
+🗄️ Database Administrator (DBA)
+Responsibilities:
+Manages database structure and performance. Oversees indexing strategies, query optimization, data migrations, and backup procedures to ensure data integrity and efficient access.
+
+Tools: PostgreSQL, pgAdmin, Redis (for caching), raw SQL for tuning
+
+⚙️ DevOps Engineer
+Responsibilities:
+Manages infrastructure setup and deployment pipelines. Handles Dockerization, environment configuration, CI/CD integration, monitoring tools, and scaling strategies using Kubernetes.
+
+Tools: Docker, Docker Compose, Kubernetes, GitHub Actions (CI/CD), Nginx, monitoring tools (e.g., Prometheus/Grafana)
+
+✅ QA Engineer
+Responsibilities:
+Ensures the stability and correctness of the system by writing and maintaining unit, integration, and end-to-end tests. Validates features against requirements and monitors bug reports and test coverage.
+
+Tools: Django Test Framework, Pytest, Postman, Swagger UI, Selenium (for E2E)
